@@ -14,25 +14,50 @@
 // mock database
 // const productDatabase = {}
 
-import { Products } from './dbConnectors';
+import { reject } from 'lodash';
+import { Product } from './dbConnectors';
 
 export const resolvers = {
-    getProduct: ({id}) => {
-        return Promise((resolve) => {
-            Products.findById({_id: id}, (err, product) => {
-                if (err) reject(err)
-                else resolve(product)
+    getProduct: ({ id }) => {
+        return new Promise((resolve) => {
+            Product.findById({ _id: id }).then((product) => {
+                resolve(product)
+
             })
         })
+        .catch(err => console.log(err))
     },
     // non-persistent way of getting products
     // getProducts: ({id}) => {
     //     return new Product(id, productDatabase[id])
     // },
     // mutation
+
     createProduct: ({ input }) => {
-        // let id = require('crypto').randomBytes(10).toString('hex')
-        // productDatabase[ id ] = input;
-        // return new Product(id, input)
-    }
+        const newProduct = new Product({
+            name: input.name,
+            description: input.description,
+            price: input.price,
+            soldout: input.soldout,
+            inventory: input.inventory,
+            stores: input.stores
+        })
+
+        newProduct.id = newProduct._id
+
+        return new Promise((resolve) => {
+            newProduct.save().then(() => {
+                resolve(newProduct)
+            })
+                .catch((err) => console.log(err))
+        })
+
+    },
+
+    // non-db approach to creating product
+    // createProduct: ({ input }) => {
+    //     let id = require('crypto').randomBytes(10).toString('hex')
+    //     productDatabase[ id ] = input;
+    //     return new Product(id, input)
+    // }
 }

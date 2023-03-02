@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 // Mongo connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/widgets', {
+mongoose.connect('mongodb://127.0.0.1/products', {
     useNewUrlParser: true
 })
 
@@ -19,6 +19,6 @@ const ProductSchema = new mongoose.Schema({
 })
 
 // passsing the database into a model and using the schema
-const Products = mongoose.model('products', ProductSchema)
+const Product = mongoose.model('products', ProductSchema)
 
-export {Products}
+export {Product}
