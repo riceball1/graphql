@@ -14,18 +14,24 @@
 // mock database
 // const productDatabase = {}
 
-import { reject } from 'lodash';
 import { Product } from './dbConnectors';
 
 export const resolvers = {
-    getProduct: ({ id }) => {
-        return new Promise((resolve) => {
-            Product.findById({ _id: id }).then((product) => {
-                resolve(product)
 
-            })
-        })
-            .catch(err => console.log(err))
+    getAllProducts: () => {
+        return Product.find({})
+    },
+    getProduct: async ({ id }) => {
+        try {
+            return await new Promise((resolve) => {
+                Product.findById({ _id: id }).then((product) => {
+                    resolve(product);
+
+                });
+            });
+        } catch (err) {
+            return console.log(err);
+        }
     },
     // non-persistent way of getting products
     // getProducts: ({id}) => {
@@ -68,6 +74,7 @@ export const resolvers = {
     //     productDatabase[ id ] = input;
     //     return new Product(id, input)
     // }
+    // Delete Product using Mongoose
     deleteProduct: ({ id }) => {
         return new Promise((resolve) => {
             Product.findByIdAndRemove({ _id: id })

@@ -55,3 +55,74 @@ mutation {
   }
 }
 ```
+
+Example of querying using aliases
+
+```
+
+query {
+  query1: getProduct(id: "6400493c7cd2a4e2657c8d60") {
+    name
+    price
+  }
+  query2: getProduct(id: "6400493c7cd2a4e2657c8d60" ) {
+    description
+    name
+  }
+}
+
+result:
+
+{
+  "data": {
+    "query1": {
+      "name": "cream1",
+      "price": 15.99
+    },
+    "query2": {
+      "description": "facial cream1",
+      "name": "cream1"
+    }
+  }
+}
+
+```
+
+Fragments used to query multiple places same data
+
+```
+query {
+  query1: getProduct(id: "6400493c7cd2a4e2657c8d60") {
+  	...queryProduct
+  }
+  query2: getProduct(id: "6400493c7cd2a4e2657c8d60" ) {
+ 	...queryProduct
+  }
+}
+
+fragment queryProduct on Product {
+  name
+  price
+  description
+  soldout
+}
+
+Result:
+
+{
+  "data": {
+    "query1": {
+      "name": "cream1",
+      "price": 15.99,
+      "description": "facial cream1",
+      "soldout": "ONSALE"
+    },
+    "query2": {
+      "name": "cream1",
+      "price": 15.99,
+      "description": "facial cream1",
+      "soldout": "ONSALE"
+    }
+  }
+}
+```
