@@ -1,5 +1,6 @@
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql';
+import { resolvers } from './resolvers';
 import schema from './schema'
 
 
@@ -11,16 +12,29 @@ app.get('/', (req, res) => {
     res.send('GraphQL')
 })
 
+
 // initial graphql 
-const root  = { product: () => {
-    return {
-        "id": 124508,
-        "name": "widget",
-        "description": "Beautiful widget",
-        "price": 24.99,
-        "soldout": false,
-    }
-}}
+const root = resolvers;
+
+// 
+// {
+//     product: () => {
+//         return {
+//             "id": 124508,
+//             "name": "widget",
+//             "description": "Beautiful widget",
+//             "price": 24.99,
+//             "soldout": false,
+//             "stores": [ { store: "San Francisco" }, { "store": "Los Angeles" } ],
+//         }
+//     },
+//     // mutation
+//     createProduct: ({ input }) => {
+//         let id = require('crypto').randomBytes(10).toString('hex')
+//         productDatabase[ id ] = input;
+//         return new Product(id, input)
+//     }
+// }
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
