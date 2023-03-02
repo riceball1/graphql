@@ -25,7 +25,7 @@ export const resolvers = {
 
             })
         })
-        .catch(err => console.log(err))
+            .catch(err => console.log(err))
     },
     // non-persistent way of getting products
     // getProducts: ({id}) => {
@@ -51,7 +51,15 @@ export const resolvers = {
             })
                 .catch((err) => console.log(err))
         })
-
+    },
+    updateProduct: ({ input }) => {
+        return new Promise((resolve) => {
+            Product.findOneAndUpdate({ _id: input.id }, input, { new: true })
+                .then((product) => {
+                    resolve(product)
+                })
+                .catch((err) => console.log(err))
+        })
     },
 
     // non-db approach to creating product
@@ -60,4 +68,13 @@ export const resolvers = {
     //     productDatabase[ id ] = input;
     //     return new Product(id, input)
     // }
-}
+    deleteProduct: ({ id }) => {
+        return new Promise((resolve) => {
+            Product.findByIdAndRemove({ _id: id })
+                .then(() => {
+                    resolve('Successfully deleted')
+                })
+                .catch(err => console.log(err))
+        })
+    },
+};
