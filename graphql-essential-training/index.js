@@ -1,7 +1,7 @@
 import express from 'express'
 import { graphqlHTTP } from 'express-graphql';
-import { resolvers } from './resolvers';
-import schema from './schema'
+import { resolvers } from './data/resolvers';
+import schema from './data/schema'
 
 
 const app = express()
@@ -20,12 +20,12 @@ const root = resolvers;
 // {
 //     product: () => {
 //         return {
-//             "id": 124508,
-//             "name": "widget",
-//             "description": "Beautiful widget",
-//             "price": 24.99,
-//             "soldout": false,
-//             "stores": [ { store: "San Francisco" }, { "store": "Los Angeles" } ],
+            // "id": 124508,
+            // "name": "widget",
+            // "description": "Beautiful widget",
+            // "price": 24.99,
+            // "soldout": false,
+            // "stores": [ { store: "San Francisco" }, { "store": "Los Angeles" } ],
 //         }
 //     },
 //     // mutation

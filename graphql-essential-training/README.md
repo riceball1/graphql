@@ -22,6 +22,10 @@ GraphQL a query language for your API. It's designed to minimize call to the ser
 - Enumeration Types
   - - Enumeration type or commonly call enums, is a special scale type that allows you to define a specific set of data that field takes and restrict the input to what you list in the enum type.
 
+- Data persistence with Mongodb
+  - mongodb community [setup](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/)
+  - install the following dependencies: `npm i mongoose sequelize sqlite3 casual lodash`
+
 ## Example Queries
 
 This is an example of a mutation 
