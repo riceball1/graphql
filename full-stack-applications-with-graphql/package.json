@@ -1,0 +1,17 @@
+{
+  "name": "full-stack-applications-with-graphql",
+  "version": "1.0.0",
+  "description": "[educative.io tutorial](https://www.educative.io/courses/full-stack-applications-with-graphql)",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
