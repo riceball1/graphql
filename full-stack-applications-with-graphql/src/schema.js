@@ -1,11 +1,9 @@
-
-
 const {readFileSync} = require('fs')
 
-function readSchema() {
+const readSchema = () => {
     return readFileSync('src/schema.graphql').toString('utf-8')
 }
 
-module.export = {
-    readSchema
+module.exports = {
+    readSchema: readSchema
 }
