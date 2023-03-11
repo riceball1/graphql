@@ -4,14 +4,20 @@
   "description": "[educative.io tutorial](https://www.educative.io/courses/full-stack-applications-with-graphql)",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "db:up": "docker-compose up",
+    "db:seed": "seed -u 'mongodb://127.0.0.1:27017/products-db' --db-name products-db --drop-database ./server/data"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "apollo-server": "^3.12.0"
+    "apollo-server": "^3.12.0",
+    "mongoose": "^7.0.1",
+    "pino": "^8.11.0",
+    "pino-pretty": "^9.4.0"
   },
   "devDependencies": {
+    "mongo-seeding-cli": "^3.7.2",
     "nodemon": "^2.0.21"
   }
 }
