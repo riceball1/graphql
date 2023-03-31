@@ -46,3 +46,23 @@ In a GraphQL schema, mutations are defined in the same way as queries, but with 
 To execute a mutation, you specify the mutation name and the input arguments, which represent the data you want to modify. The server then applies the mutation to the data store and returns a result, typically including the modified data.
 
 Overall, GraphQL mutations provide a powerful and flexible way to modify data on the server-side, while also providing a consistent and type-safe API for clients to use.
+
+Example of a mutation:
+
+```javascript
+Mutation: {
+  createProduct: async (_, { input } ) => {
+    const author = await User.findOne({userName: "ellen"})
+    return Product.create({
+      name: input.name,
+      description: input.description,
+      url: input.url,
+      numberOfVotes: 0,
+      publishedAt: Date.now(),
+      authorId: author._id,
+      categoriesIds: input.categoriesIds,
+    })
+  }
+}
+```
+
