@@ -22,4 +22,4 @@ services:
     depends_on:
       - mongo
     environment:
-      - ME_CONFIG_MONGODB_URL=mongodb://user:pass@mongo:27017/products-db
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/products-db
