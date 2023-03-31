@@ -3,7 +3,7 @@ const Product = require('./models/Product.js')
 const Category = require('./models/Category.js')
 const User = require('./models/User.js')
 
-const { productsData, usersData, categoriesData } = require('./data');
+// const { productsData, usersData, categoriesData } = require('./data');
 
 
 const resolvers = {
@@ -15,9 +15,13 @@ const resolvers = {
 
             return Product.find({}).exec()
         },
-        productsByAuthor: (_, { authorName }) => {
-            const user = usersData.find(user => user.userName === authorName)
-            return productsData.filter(product => product.authorId === user.id)
+        productsByAuthor: async (_, { authorName }) => {
+            const author = await User.findOne({ userName: authorName })
+
+            return Product.find({authorId: author._id}).exec({})
+
+            // const user = usersData.find(user => user.userName === authorName)
+            // return productsData.filter(product => product.authorId === user.id)
         },
         // productsByCategory: (_, {slug}) => {
         //     const category = categoriesData.find(category => category.slug === slug)
